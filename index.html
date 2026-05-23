@@ -107,7 +107,7 @@ title: ""
       <article class="release-card release-card--featured">
         <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="release-card__cover-link">
           <div class="release-card__cover">
-            <img src="{{ release.cover }}" alt="{{ release.title }}" loading="lazy">
+            <img src="{{ release.cover | relative_url }}" alt="{{ release.title }}" loading="lazy">
             <div class="release-card__overlay"><span>LISTEN &nbsp;&#8599;</span></div>
           </div>
         </a>
@@ -124,7 +124,7 @@ title: ""
       <article class="release-card release-card--featured">
         <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="release-card__cover-link">
           <div class="release-card__cover">
-            <img src="{{ release.cover }}" alt="{{ release.title }}" loading="lazy">
+            <img src="{{ release.cover | relative_url }}" alt="{{ release.title }}" loading="lazy">
             <div class="release-card__overlay"><span>LISTEN &nbsp;&#8599;</span></div>
           </div>
         </a>

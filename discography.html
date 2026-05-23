@@ -30,7 +30,7 @@ description: "Complete discography of Atlas//Anon — albums, EPs, and singles o
       <article class="disc-card">
         <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="disc-card__cover-link" aria-label="{{ release.title }}">
           <div class="disc-card__cover">
-            <img src="{{ release.cover }}" alt="{{ release.title }} cover" loading="lazy">
+            <img src="{{ release.cover | relative_url }}" alt="{{ release.title }} cover" loading="lazy">
             <div class="disc-card__overlay">
               <span class="disc-card__listen">LISTEN &nbsp;&#8599;</span>
             </div>
@@ -65,7 +65,7 @@ description: "Complete discography of Atlas//Anon — albums, EPs, and singles o
       <article class="disc-card">
         <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="disc-card__cover-link" aria-label="{{ release.title }}">
           <div class="disc-card__cover">
-            <img src="{{ release.cover }}" alt="{{ release.title }} cover" loading="lazy">
+            <img src="{{ release.cover | relative_url }}" alt="{{ release.title }} cover" loading="lazy">
             <div class="disc-card__overlay">
               <span class="disc-card__listen">LISTEN &nbsp;&#8599;</span>
             </div>
