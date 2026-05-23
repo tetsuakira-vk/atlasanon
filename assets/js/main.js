@@ -270,48 +270,58 @@ const HUD = {
 // ── Frequencies spectrum ─────────────────────────────────────────────────────
 const Frequencies = {
   BAR_COUNT: 52,
-  barEls: [],
-  barData: [],
+  bars: [],
+  canvas: null,
+  ctx: null,
   raf: null,
-  pointerX: -1, // -1 = no pointer
+  pointerX: -1,
   t0: 0,
 
   init() {
     const el = document.getElementById('freq-spectrum');
     if (!el) return;
 
-    const frag = document.createDocumentFragment();
+    const canvas = document.createElement('canvas');
+    const ctx    = canvas.getContext('2d');
+    el.appendChild(canvas);
+    this.canvas = canvas;
+    this.ctx    = ctx;
+
+    const resize = () => {
+      canvas.width  = el.offsetWidth  * (window.devicePixelRatio || 1);
+      canvas.height = el.offsetHeight * (window.devicePixelRatio || 1);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
     for (let i = 0; i < this.BAR_COUNT; i++) {
       const t    = i / (this.BAR_COUNT - 1);
       const bell = Math.sin(Math.PI * t);
-      const base = 0.06 + bell * 0.62;
-      const bar  = document.createElement('div');
-      bar.className = 'bar';
-      this.barEls.push(bar);
-      this.barData.push({
+      const base = 0.08 + bell * 0.72;
+      this.bars.push({
         phase: Math.random() * Math.PI * 2,
-        freq:  0.4 + Math.random() * 0.9,
-        min:   base * 0.1,
-        max:   base * 0.78,
+        freq:  0.4 + Math.random() * 0.85,
+        min:   base * 0.12,
+        max:   base * 0.9,
       });
-      frag.appendChild(bar);
     }
-    el.appendChild(frag);
 
-    // Mouse
     el.addEventListener('mousemove', (e) => {
       const r = el.getBoundingClientRect();
       this.pointerX = (e.clientX - r.left) / r.width;
     });
     el.addEventListener('mouseleave', () => { this.pointerX = -1; });
 
-    // Touch
+    el.addEventListener('touchstart', (e) => {
+      const r = el.getBoundingClientRect();
+      this.pointerX = (e.touches[0].clientX - r.left) / r.width;
+    }, { passive: true });
     el.addEventListener('touchmove', (e) => {
       const r = el.getBoundingClientRect();
       this.pointerX = (e.touches[0].clientX - r.left) / r.width;
     }, { passive: true });
-    el.addEventListener('touchend',   () => { this.pointerX = -1; });
-    el.addEventListener('touchcancel',() => { this.pointerX = -1; });
+    el.addEventListener('touchend',    () => { this.pointerX = -1; });
+    el.addEventListener('touchcancel', () => { this.pointerX = -1; });
 
     this.t0 = performance.now();
     this._loop();
@@ -319,22 +329,35 @@ const Frequencies = {
   },
 
   _loop() {
-    const t  = (performance.now() - this.t0) / 1000;
-    const mx = this.pointerX;
-    const n  = this.BAR_COUNT;
+    const { canvas, ctx, bars, pointerX } = this;
+    const W = canvas.width, H = canvas.height;
+    const n = bars.length;
+    const t = (performance.now() - this.t0) / 1000;
+
+    ctx.clearRect(0, 0, W, H);
+
+    const gap  = 3 * (window.devicePixelRatio || 1);
+    const barW = (W - gap * (n - 1)) / n;
+
+    const grad = ctx.createLinearGradient(0, H, 0, 0);
+    grad.addColorStop(0, '#7c3aed');
+    grad.addColorStop(1, '#e879f9');
+    ctx.fillStyle = grad;
 
     for (let i = 0; i < n; i++) {
-      const d    = this.barData[i];
-      const wave = (Math.sin(t * d.freq * Math.PI * 2 + d.phase) + 1) / 2; // 0..1
-      let h      = d.min + wave * (d.max - d.min);
+      const d    = bars[i];
+      const wave = (Math.sin(t * d.freq * Math.PI * 2 + d.phase) + 1) / 2;
+      let   h    = d.min + wave * (d.max - d.min);
 
-      if (mx >= 0) {
+      if (pointerX >= 0) {
         const pos   = i / (n - 1);
-        const spike = Math.exp(-(pos - mx) * (pos - mx) * 22);
-        h = h + spike * (1 - h) * 0.92;
+        const spike = Math.exp(-(pos - pointerX) * (pos - pointerX) * 20);
+        h = h + spike * (1 - h) * 0.94;
       }
 
-      this.barEls[i].style.transform = `scaleY(${h.toFixed(3)})`;
+      const x    = i * (barW + gap);
+      const barH = Math.max(h * H, 2);
+      ctx.fillRect(x, H - barH, barW, barH);
     }
 
     this.raf = requestAnimationFrame(() => this._loop());
