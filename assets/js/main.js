@@ -270,78 +270,82 @@ const HUD = {
 // ── Frequencies spectrum ─────────────────────────────────────────────────────
 const Frequencies = {
   BAR_COUNT: 52,
-  bars: [],
+  barEls: [],
+  barData: [],
   raf: null,
-  mouseX: -1,
-  isHovered: false,
+  pointerX: -1, // -1 = no pointer
+  t0: 0,
 
   init() {
     const el = document.getElementById('freq-spectrum');
     if (!el) return;
 
     const frag = document.createDocumentFragment();
-
     for (let i = 0; i < this.BAR_COUNT; i++) {
       const t    = i / (this.BAR_COUNT - 1);
       const bell = Math.sin(Math.PI * t);
       const base = 0.06 + bell * 0.62;
-
-      const bar = document.createElement('div');
+      const bar  = document.createElement('div');
       bar.className = 'bar';
-      bar.style.setProperty('--dur', (0.45 + Math.random() * 0.7).toFixed(2) + 's');
-      bar.style.setProperty('--del', (Math.random() * 0.55).toFixed(2) + 's');
-      bar.style.setProperty('--min', (base * 0.1).toFixed(3));
-      bar.style.setProperty('--max', (base * 0.72).toFixed(3));
-      this.bars.push({ el: bar, base });
+      this.barEls.push(bar);
+      this.barData.push({
+        phase: Math.random() * Math.PI * 2,
+        freq:  0.4 + Math.random() * 0.9,
+        min:   base * 0.1,
+        max:   base * 0.78,
+      });
       frag.appendChild(bar);
     }
-
     el.appendChild(frag);
 
-    el.addEventListener('mouseenter', () => { this.isHovered = true; this._tick(el); });
-    el.addEventListener('mouseleave', () => {
-      this.isHovered = false;
-      cancelAnimationFrame(this.raf);
-      this.bars.forEach(b => {
-        b.el.style.transform  = '';
-        b.el.style.animation  = '';
-      });
-    });
+    // Mouse
     el.addEventListener('mousemove', (e) => {
-      const rect = el.getBoundingClientRect();
-      this.mouseX = (e.clientX - rect.left) / rect.width;
+      const r = el.getBoundingClientRect();
+      this.pointerX = (e.clientX - r.left) / r.width;
     });
+    el.addEventListener('mouseleave', () => { this.pointerX = -1; });
 
+    // Touch
+    el.addEventListener('touchmove', (e) => {
+      const r = el.getBoundingClientRect();
+      this.pointerX = (e.touches[0].clientX - r.left) / r.width;
+    }, { passive: true });
+    el.addEventListener('touchend',   () => { this.pointerX = -1; });
+    el.addEventListener('touchcancel',() => { this.pointerX = -1; });
+
+    this.t0 = performance.now();
+    this._loop();
     this._initReadout();
   },
 
-  _tick(el) {
-    if (!this.isHovered) return;
-    const mx = this.mouseX;
+  _loop() {
+    const t  = (performance.now() - this.t0) / 1000;
+    const mx = this.pointerX;
+    const n  = this.BAR_COUNT;
 
-    this.bars.forEach((b, i) => {
-      const t    = i / (this.BAR_COUNT - 1);
-      const dist = Math.abs(t - mx);
-      const spike = Math.exp(-dist * dist * 22); // tight Gaussian around cursor
-      const h = b.base * 0.72 + spike * (1 - b.base * 0.72);
-      b.el.style.transform = `scaleY(${h.toFixed(3)})`;
-      b.el.style.animation = 'none';
-    });
+    for (let i = 0; i < n; i++) {
+      const d    = this.barData[i];
+      const wave = (Math.sin(t * d.freq * Math.PI * 2 + d.phase) + 1) / 2; // 0..1
+      let h      = d.min + wave * (d.max - d.min);
 
-    this.raf = requestAnimationFrame(() => this._tick(el));
+      if (mx >= 0) {
+        const pos   = i / (n - 1);
+        const spike = Math.exp(-(pos - mx) * (pos - mx) * 22);
+        h = h + spike * (1 - h) * 0.92;
+      }
+
+      this.barEls[i].style.transform = `scaleY(${h.toFixed(3)})`;
+    }
+
+    this.raf = requestAnimationFrame(() => this._loop());
   },
 
   _initReadout() {
     const bpmEl = document.getElementById('fq-bpm');
     const sigEl = document.getElementById('fq-signal');
-
-    const bpms = [138, 140, 138, 141, 138, 137, 139, 138];
+    const bpms  = [138, 140, 138, 141, 138, 137, 139, 138];
     let bi = 0;
-    if (bpmEl) setInterval(() => {
-      bi = (bi + 1) % bpms.length;
-      bpmEl.textContent = bpms[bi];
-    }, 3700);
-
+    if (bpmEl) setInterval(() => { bpmEl.textContent = bpms[bi = (bi + 1) % bpms.length]; }, 3700);
     if (sigEl) setInterval(() => {
       if (Math.random() > 0.78) {
         sigEl.textContent = '—';

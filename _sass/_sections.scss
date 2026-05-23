@@ -706,16 +706,9 @@
     border-radius: 2px 2px 0 0;
     background: linear-gradient(to top, $purple, $pink);
     transform-origin: bottom center;
-    transform: scaleY(var(--min, 0.05));
-    animation: bar-idle var(--dur, 0.9s) ease-in-out var(--del, 0s) infinite alternate;
+    transform: scaleY(0.05);
     will-change: transform;
-    transition: opacity 0.2s;
   }
-}
-
-@keyframes bar-idle {
-  from { transform: scaleY(var(--min, 0.05)); }
-  to   { transform: scaleY(var(--max, 0.5)); }
 }
 
 .frequencies__readout {
