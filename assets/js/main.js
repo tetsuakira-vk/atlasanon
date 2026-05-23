@@ -267,6 +267,90 @@ const HUD = {
   }
 };
 
+// ── Frequencies spectrum ─────────────────────────────────────────────────────
+const Frequencies = {
+  BAR_COUNT: 52,
+  bars: [],
+  raf: null,
+  mouseX: -1,
+  isHovered: false,
+
+  init() {
+    const el = document.getElementById('freq-spectrum');
+    if (!el) return;
+
+    const frag = document.createDocumentFragment();
+
+    for (let i = 0; i < this.BAR_COUNT; i++) {
+      const t    = i / (this.BAR_COUNT - 1);
+      const bell = Math.sin(Math.PI * t);
+      const base = 0.06 + bell * 0.62;
+
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.setProperty('--dur', (0.45 + Math.random() * 0.7).toFixed(2) + 's');
+      bar.style.setProperty('--del', (Math.random() * 0.55).toFixed(2) + 's');
+      bar.style.setProperty('--min', (base * 0.1).toFixed(3));
+      bar.style.setProperty('--max', (base * 0.72).toFixed(3));
+      this.bars.push({ el: bar, base });
+      frag.appendChild(bar);
+    }
+
+    el.appendChild(frag);
+
+    el.addEventListener('mouseenter', () => { this.isHovered = true; this._tick(el); });
+    el.addEventListener('mouseleave', () => {
+      this.isHovered = false;
+      cancelAnimationFrame(this.raf);
+      this.bars.forEach(b => {
+        b.el.style.transform  = '';
+        b.el.style.animation  = '';
+      });
+    });
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      this.mouseX = (e.clientX - rect.left) / rect.width;
+    });
+
+    this._initReadout();
+  },
+
+  _tick(el) {
+    if (!this.isHovered) return;
+    const mx = this.mouseX;
+
+    this.bars.forEach((b, i) => {
+      const t    = i / (this.BAR_COUNT - 1);
+      const dist = Math.abs(t - mx);
+      const spike = Math.exp(-dist * dist * 22); // tight Gaussian around cursor
+      const h = b.base * 0.72 + spike * (1 - b.base * 0.72);
+      b.el.style.transform = `scaleY(${h.toFixed(3)})`;
+      b.el.style.animation = 'none';
+    });
+
+    this.raf = requestAnimationFrame(() => this._tick(el));
+  },
+
+  _initReadout() {
+    const bpmEl = document.getElementById('fq-bpm');
+    const sigEl = document.getElementById('fq-signal');
+
+    const bpms = [138, 140, 138, 141, 138, 137, 139, 138];
+    let bi = 0;
+    if (bpmEl) setInterval(() => {
+      bi = (bi + 1) % bpms.length;
+      bpmEl.textContent = bpms[bi];
+    }, 3700);
+
+    if (sigEl) setInterval(() => {
+      if (Math.random() > 0.78) {
+        sigEl.textContent = '—';
+        setTimeout(() => { if (sigEl) sigEl.textContent = 'LIVE'; }, 150);
+      }
+    }, 5300);
+  }
+};
+
 // ── Boot ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   Grain.init();
@@ -276,4 +360,5 @@ document.addEventListener('DOMContentLoaded', () => {
   Nav.init();
   Scroll.init();
   HUD.init();
+  Frequencies.init();
 });

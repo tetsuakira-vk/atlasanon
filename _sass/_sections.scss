@@ -673,6 +673,92 @@
   }
 }
 
+// ── Frequencies ──────────────────────────────────────────────
+.frequencies {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 90% 50% at 50% 100%, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.frequencies__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.frequencies__spectrum {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 200px;
+  margin: 2.5rem 0 2.5rem;
+  cursor: crosshair;
+
+  .bar {
+    flex: 1;
+    min-width: 0;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(to top, $purple, $pink);
+    transform-origin: bottom center;
+    transform: scaleY(var(--min, 0.05));
+    animation: bar-idle var(--dur, 0.9s) ease-in-out var(--del, 0s) infinite alternate;
+    will-change: transform;
+    transition: opacity 0.2s;
+  }
+}
+
+@keyframes bar-idle {
+  from { transform: scaleY(var(--min, 0.05)); }
+  to   { transform: scaleY(var(--max, 0.5)); }
+}
+
+.frequencies__readout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid $border;
+}
+
+.freq-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+
+  &__label {
+    font-family: $font-mono;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: $text-muted;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    font-family: $font-mono;
+    font-size: 1rem;
+    color: $pink;
+    letter-spacing: 0.06em;
+
+    &--live { animation: live-blink 3s step-end infinite; }
+  }
+}
+
+@keyframes live-blink {
+  0%, 88%, 100% { opacity: 1; }
+  91%           { opacity: 0.15; }
+  94%           { opacity: 1; }
+  97%           { opacity: 0.4; }
+}
+
 // ── Responsive ───────────────────────────────────────────────
 @media (max-width: 900px) {
   .about__inner {
@@ -697,6 +783,9 @@
   .disc-section { padding: 3rem 1.5rem; }
 
   .section { padding: $section-pad-mobile; }
+
+  .frequencies__spectrum { height: 120px; gap: 2px; }
+  .frequencies__readout  { gap: 1.5rem; }
 
   .site-nav { padding: 1.1rem 1.5rem; }
 

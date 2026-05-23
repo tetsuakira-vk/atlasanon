@@ -1,12 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
-  <!-- Background -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" fill="#060608"/>
-
-  <!-- // mark — two diagonal strokes in pink -->
-  <line x1="7"  y1="27" x2="13" y2="5" stroke="#e879f9" stroke-width="3.2" stroke-linecap="round"/>
-  <line x1="17" y1="27" x2="23" y2="5" stroke="#e879f9" stroke-width="3.2" stroke-linecap="round"/>
-
-  <!-- Subtle purple glow behind the slashes (second layer, wider + dimmer) -->
-  <line x1="7"  y1="27" x2="13" y2="5" stroke="#7c3aed" stroke-width="6" stroke-linecap="round" opacity="0.25"/>
-  <line x1="17" y1="27" x2="23" y2="5" stroke="#7c3aed" stroke-width="6" stroke-linecap="round" opacity="0.25"/>
+  <!-- glow layer behind -->
+  <line x1="7"  y1="27" x2="13" y2="5" stroke="#a855f7" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <line x1="17" y1="27" x2="23" y2="5" stroke="#a855f7" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+  <!-- pink slashes on top -->
+  <line x1="7"  y1="27" x2="13" y2="5" stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="17" y1="27" x2="23" y2="5" stroke="#e879f9" stroke-width="3.5" stroke-linecap="round"/>
 </svg>
