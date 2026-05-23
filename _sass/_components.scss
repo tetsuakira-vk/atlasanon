@@ -1,0 +1,313 @@
+// ── Navigation ───────────────────────────────────────────────
+.site-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: $z-nav;
+  padding: 1.4rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+
+  &.scrolled {
+    background: rgba(6, 6, 8, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom-color: $border;
+  }
+}
+
+.nav-logo {
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $text;
+  z-index: $z-menu + 1;
+  position: relative;
+
+  em {
+    font-style: normal;
+    color: $pink;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+
+  a {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $text-muted;
+    transition: color $ease;
+
+    &:hover { color: $pink; }
+  }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: $z-menu + 1;
+  position: relative;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: $text;
+    transition: $ease;
+  }
+
+  &.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  &.is-open span:nth-child(2) { opacity: 0; }
+  &.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+}
+
+// ── Release card ─────────────────────────────────────────────
+.release-card {
+  flex: 0 0 250px;
+  border: 1px solid $border;
+  background: $surface;
+  transition: border-color $ease, transform $ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $border-bright;
+    transform: translateY(-5px);
+
+    .release-card__overlay { opacity: 1; }
+  }
+
+  &__cover {
+    width: 100%;
+    aspect-ratio: 1;
+    background: $surface-2;
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    &:hover img { transform: scale(1.04); }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(124, 58, 237, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity $ease;
+
+    span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: $pink;
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: $surface-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65%; height: 65%;
+      background: radial-gradient(circle, rgba(192, 38, 211, 0.2), transparent 70%);
+    }
+
+    span {
+      position: relative;
+      z-index: 2;
+      font-family: $font-display;
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(232, 121, 249, 0.25);
+    }
+  }
+
+  &__info { padding: 1.1rem 1.2rem 1.4rem; }
+
+  &__title {
+    font-family: $font-display;
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    color: $text;
+  }
+
+  &__meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $text-muted;
+
+    em {
+      font-style: normal;
+      color: $purple-light;
+    }
+  }
+}
+
+// ── Video card ───────────────────────────────────────────────
+.video-card {
+  border: 1px solid $border;
+  background: $surface;
+  overflow: hidden;
+  transition: border-color $ease;
+
+  &:hover {
+    border-color: $border-bright;
+
+    .video-card__thumb img { transform: scale(1.04); }
+    .video-card__play { background: rgba(192, 38, 211, 0.25); }
+  }
+
+  &__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: $surface-2;
+    overflow: hidden;
+    display: block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 6, 8, 0.35);
+    }
+  }
+
+  &__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; height: 50px;
+    border: 1px solid rgba(232, 121, 249, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background $ease;
+
+    svg {
+      fill: $pink;
+      width: 18px;
+      margin-left: 3px;
+    }
+  }
+
+  &__info { padding: 1rem 1.1rem 1.3rem; }
+
+  &__title {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: $text;
+    margin-bottom: 0.3rem;
+  }
+
+  &__meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: $text-muted;
+  }
+}
+
+// ── Social links ─────────────────────────────────────────────
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+
+  a {
+    padding: 0.55rem 1.1rem;
+    border: 1px solid $border;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $text-muted;
+    transition: border-color $ease, color $ease;
+
+    &:hover {
+      border-color: $pink;
+      color: $pink;
+    }
+  }
+}
+
+// ── Scroll indicator ─────────────────────────────────────────
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+
+  span {
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: $text-muted;
+  }
+}
+
+.scroll-line {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(to bottom, $purple, transparent);
+  animation: scroll-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.8; }
+  50%       { transform: scaleY(0.5); opacity: 0.2; }
+}

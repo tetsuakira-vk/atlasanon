@@ -1,0 +1,82 @@
+# Singles — sorted newest first
+# featured: true = shown on homepage
+
+- title: "Cruel"
+  year: 2026
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/cruel.jpg"
+  link: "https://atlasanon.bandcamp.com/album/cruel"
+  featured: true
+
+- title: "Zer0"
+  year: 2026
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/zer0.jpg"
+  link: "https://atlasanon.bandcamp.com/album/zer0"
+  featured: true
+
+- title: "Distraught"
+  year: 2026
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/distraught.jpg"
+  link: "https://atlasanon.bandcamp.com/track/distraught"
+  featured: true
+
+- title: "Beyond Dawn"
+  year: 2026
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/beyond-dawn.jpg"
+  link: "https://atlasanon.bandcamp.com/album/beyond-dawn"
+  featured: false
+
+- title: "Trepanation"
+  year: 2024
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/trepanation.jpg"
+  link: "https://atlasanon.bandcamp.com/album/trepanation"
+  featured: false
+
+- title: "Adrenaline"
+  year: 2023
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/adrenaline.jpg"
+  link: "https://atlasanon.bandcamp.com/album/adrenaline"
+  featured: false
+
+- title: "Champion District"
+  year: 2023
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/champion-district.jpg"
+  link: "https://atlasanon.bandcamp.com/track/champion-district"
+  featured: false
+
+- title: "Awaiting Eternity (RHISUS Remix)"
+  year: 2022
+  format: "Remix"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/awaiting-eternity-rhisus-remix.jpg"
+  link: "https://atlasanon.bandcamp.com/track/awaiting-eternity-rhisus-remix"
+  featured: false
+
+- title: "Siren"
+  year: 2022
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/siren.jpg"
+  link: "https://atlasanon.bandcamp.com/album/siren"
+  featured: false
+
+- title: "THE FOG feat. VillainEye"
+  year: 2021
+  format: "Single"
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/the-fog.jpg"
+  link: "https://atlasanon.bandcamp.com/track/the-fog-feat-villaineye"
+  featured: false

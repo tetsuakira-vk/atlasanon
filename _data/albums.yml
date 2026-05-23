@@ -1,0 +1,83 @@
+# Albums & EPs — sorted newest first
+# featured: true = shown on homepage (keep to 2)
+
+- title: "Elsewhere // Obscura"
+  year: 2026
+  format: "Album"
+  tracks: 16
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/elsewhere-obscura.jpg"
+  link: "https://atlasanon.bandcamp.com/album/elsewhere-obscura-2"
+  featured: true
+
+- title: "Artificial Dawn"
+  year: 2025
+  format: "Album"
+  tracks: 11
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/artificial-dawn.jpg"
+  link: "https://atlasanon.bandcamp.com/album/artificial-dawn"
+  featured: false
+
+- title: "Echoes"
+  year: 2023
+  format: "Album"
+  tracks: 11
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/echoes.jpg"
+  link: "https://atlasanon.bandcamp.com/album/echoes"
+  featured: false
+
+- title: "LIBRA"
+  year: 2022
+  format: "Album"
+  tracks: 7
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/libra.jpg"
+  link: "https://atlasanon.bandcamp.com/album/libra"
+  featured: false
+
+- title: "Synthetic Amnesty"
+  year: 2022
+  format: "EP"
+  tracks: 4
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/synthetic-amnesty.jpg"
+  link: "https://atlasanon.bandcamp.com/album/synthetic-amnesty"
+  featured: false
+
+- title: "Ruined"
+  year: 2021
+  format: "EP"
+  tracks: 5
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/ruined.jpg"
+  link: "https://atlasanon.bandcamp.com/album/ruined"
+  featured: false
+
+- title: "Melancholia"
+  year: 2021
+  format: "Album"
+  tracks: 11
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/melancholia.jpg"
+  link: "https://atlasanon.bandcamp.com/album/melancholia"
+  featured: false
+
+- title: "Hollow Deity"
+  year: 2020
+  format: "Album"
+  tracks: 8
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/hollow-deity.jpg"
+  link: "https://atlasanon.bandcamp.com/album/hollow-deity"
+  featured: false
+
+- title: "Forgotten Tunes"
+  year: 2018
+  format: "Compilation"
+  tracks: 13
+  label: "Zetsubou Records"
+  cover: "/assets/images/albums/forgotten-tunes.jpg"
+  link: "https://atlasanon.bandcamp.com/album/forgotten-tunes"
+  featured: false

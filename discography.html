@@ -1,0 +1,93 @@
+---
+layout: default
+title: "Discography"
+description: "Complete discography of Atlas//Anon — albums, EPs, and singles on Zetsubou Records."
+---
+
+<div class="disc-page">
+
+  <!-- Page header -->
+  <header class="disc-page__header">
+    <div class="disc-page__header-bg" aria-hidden="true"></div>
+    <div class="disc-page__header-inner">
+      <span class="section-label" data-reveal>Full Catalogue</span>
+      <h1 class="disc-page__title" data-reveal data-delay="1">Discography</h1>
+      <p class="disc-page__sub" data-reveal data-delay="2">
+        {{ site.data.albums | size | plus: site.data.singles | size }} releases &nbsp;&middot;&nbsp; Zetsubou Records
+      </p>
+    </div>
+  </header>
+
+  <!-- ── Albums & EPs ── -->
+  <section class="disc-section" aria-labelledby="albums-title">
+    <div class="disc-section__heading" data-reveal>
+      <span class="section-label">01 // Albums &amp; EPs</span>
+      <h2 class="disc-section__title" id="albums-title">Albums &amp; EPs</h2>
+    </div>
+
+    <div class="disc-grid" data-reveal data-delay="2">
+      {% for release in site.data.albums %}
+      <article class="disc-card">
+        <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="disc-card__cover-link" aria-label="{{ release.title }}">
+          <div class="disc-card__cover">
+            <img src="{{ release.cover }}" alt="{{ release.title }} cover" loading="lazy">
+            <div class="disc-card__overlay">
+              <span class="disc-card__listen">LISTEN &nbsp;&#8599;</span>
+            </div>
+          </div>
+        </a>
+        <div class="disc-card__info">
+          <h3 class="disc-card__title">{{ release.title }}</h3>
+          <p class="disc-card__meta">
+            <em>{{ release.format }}</em>
+            &nbsp;&middot;&nbsp;
+            {{ release.year }}
+            {% if release.tracks %}
+            &nbsp;&middot;&nbsp;
+            {{ release.tracks }} tracks
+            {% endif %}
+          </p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- ── Singles & Remixes ── -->
+  <section class="disc-section" aria-labelledby="singles-title">
+    <div class="disc-section__heading" data-reveal>
+      <span class="section-label">02 // Singles &amp; Remixes</span>
+      <h2 class="disc-section__title" id="singles-title">Singles &amp; Remixes</h2>
+    </div>
+
+    <div class="disc-grid disc-grid--singles" data-reveal data-delay="2">
+      {% for release in site.data.singles %}
+      <article class="disc-card">
+        <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="disc-card__cover-link" aria-label="{{ release.title }}">
+          <div class="disc-card__cover">
+            <img src="{{ release.cover }}" alt="{{ release.title }} cover" loading="lazy">
+            <div class="disc-card__overlay">
+              <span class="disc-card__listen">LISTEN &nbsp;&#8599;</span>
+            </div>
+          </div>
+        </a>
+        <div class="disc-card__info">
+          <h3 class="disc-card__title">{{ release.title }}</h3>
+          <p class="disc-card__meta">
+            <em>{{ release.format }}</em>
+            &nbsp;&middot;&nbsp;
+            {{ release.year }}
+          </p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <div class="disc-page__footer" data-reveal>
+    <a href="https://atlasanon.bandcamp.com" target="_blank" rel="noopener noreferrer" class="disc-page__bandcamp">
+      Stream &amp; purchase on Bandcamp &nbsp;&#8599;
+    </a>
+  </div>
+
+</div>

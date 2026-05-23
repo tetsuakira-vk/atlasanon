@@ -1,0 +1,32 @@
+title: "Atlas//Anon"
+description: "[ SIGNAL FROM THE DARK ] — Wave / Witchhouse. Zetsubou Records."
+baseurl: "/atlasanon"
+url: "https://tetsuakira-vk.github.io"
+
+markdown: kramdown
+highlighter: rouge
+theme: null
+
+sass:
+  style: compressed
+  sass_dir: _sass
+  quiet_deps: true
+  silence_deprecations:
+    - import
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - assests
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

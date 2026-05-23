@@ -1,0 +1,259 @@
+---
+layout: default
+title: ""
+---
+
+<!-- ═══════════════════════════════════════════════ HERO -->
+<section class="hero" id="hero" aria-label="Hero">
+
+  <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero__bg" aria-hidden="true"></div>
+
+  <!-- Scrolling marquee — track titles -->
+  <div class="hero__marquee" aria-hidden="true">
+    <div class="hero__marquee-inner">
+      <span>Polytheistic Prison</span><span class="sep">//</span>
+      <span>Amber Lies</span><span class="sep">//</span>
+      <span>Sinking Sky</span><span class="sep">//</span>
+      <span>Nothing Above Us</span><span class="sep">//</span>
+      <span>Dissolved</span><span class="sep">//</span>
+      <span>Covered In Roses</span><span class="sep">//</span>
+      <span>Kagerou</span><span class="sep">//</span>
+      <span>Bleeding Monochrome</span><span class="sep">//</span>
+      <span>No Signal</span><span class="sep">//</span>
+      <span>Liminal Space</span><span class="sep">//</span>
+      <span>Perfect Deformity</span><span class="sep">//</span>
+      <span>A Thousand Cigarettes</span><span class="sep">//</span>
+      <span>Fornevermore</span><span class="sep">//</span>
+      <span>Monolith</span><span class="sep">//</span>
+      <span>Shinjuku</span><span class="sep">//</span>
+      <span>Awaiting Eternity</span><span class="sep">//</span>
+      <span>Tesco, 4 AM, Sunday</span><span class="sep">//</span>
+      <span>Sympathy Lost</span><span class="sep">//</span>
+      <span>Glass Tree</span><span class="sep">//</span>
+      <span>Closer To Control</span><span class="sep">//</span>
+      <span>Ashes</span><span class="sep">//</span>
+      <span>Phobia</span><span class="sep">//</span>
+      <span>An Average Blasphemy</span><span class="sep">//</span>
+      <span>Frequencies</span><span class="sep">//</span>
+      <span>Mercy</span><span class="sep">//</span>
+      <!-- duplicate for seamless loop -->
+      <span>Polytheistic Prison</span><span class="sep">//</span>
+      <span>Amber Lies</span><span class="sep">//</span>
+      <span>Sinking Sky</span><span class="sep">//</span>
+      <span>Nothing Above Us</span><span class="sep">//</span>
+      <span>Dissolved</span><span class="sep">//</span>
+      <span>Covered In Roses</span><span class="sep">//</span>
+      <span>Kagerou</span><span class="sep">//</span>
+      <span>Bleeding Monochrome</span><span class="sep">//</span>
+      <span>No Signal</span><span class="sep">//</span>
+      <span>Liminal Space</span><span class="sep">//</span>
+      <span>Perfect Deformity</span><span class="sep">//</span>
+      <span>A Thousand Cigarettes</span><span class="sep">//</span>
+      <span>Fornevermore</span><span class="sep">//</span>
+      <span>Monolith</span><span class="sep">//</span>
+      <span>Shinjuku</span><span class="sep">//</span>
+      <span>Awaiting Eternity</span><span class="sep">//</span>
+      <span>Tesco, 4 AM, Sunday</span><span class="sep">//</span>
+      <span>Sympathy Lost</span><span class="sep">//</span>
+      <span>Glass Tree</span><span class="sep">//</span>
+      <span>Closer To Control</span><span class="sep">//</span>
+      <span>Ashes</span><span class="sep">//</span>
+      <span>Phobia</span><span class="sep">//</span>
+      <span>An Average Blasphemy</span><span class="sep">//</span>
+      <span>Frequencies</span><span class="sep">//</span>
+      <span>Mercy</span><span class="sep">//</span>
+    </div>
+  </div>
+
+  <div class="hero__content">
+    <img
+      src="{{ '/assets/images/logo.png' | relative_url }}"
+      alt="Atlas//Anon"
+      class="hero__logo"
+    >
+    <p class="hero__tagline">[ SIGNAL FROM THE DARK ]</p>
+  </div>
+
+  <!-- HUD corner elements -->
+  <div class="hero__hud hero__hud--bl" aria-hidden="true">
+    <span class="hud-label">LOC</span>
+    <span class="hud-value" id="hud-loc">51.5074°N 0.1278°W</span>
+  </div>
+  <div class="hero__hud hero__hud--br" aria-hidden="true">
+    <span class="hud-label">FREQ</span>
+    <span class="hud-value" id="hud-freq">138.72Hz</span>
+  </div>
+
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════ LATEST RELEASES -->
+<section class="section releases" id="discography" aria-labelledby="releases-title">
+
+  <div data-reveal>
+    <span class="section-label">Latest Releases</span>
+    <h2 class="section-title" id="releases-title">New Music</h2>
+  </div>
+
+  <div class="releases__grid" data-reveal data-delay="2">
+
+    {% for release in site.data.singles %}
+      {% if release.featured %}
+      <article class="release-card release-card--featured">
+        <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="release-card__cover-link">
+          <div class="release-card__cover">
+            <img src="{{ release.cover }}" alt="{{ release.title }}" loading="lazy">
+            <div class="release-card__overlay"><span>LISTEN &nbsp;&#8599;</span></div>
+          </div>
+        </a>
+        <div class="release-card__info">
+          <h3 class="release-card__title">{{ release.title }}</h3>
+          <p class="release-card__meta"><em>{{ release.format }}</em> &nbsp;&middot;&nbsp; {{ release.year }}</p>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+
+    {% for release in site.data.albums %}
+      {% if release.featured %}
+      <article class="release-card release-card--featured">
+        <a href="{{ release.link }}" target="_blank" rel="noopener noreferrer" class="release-card__cover-link">
+          <div class="release-card__cover">
+            <img src="{{ release.cover }}" alt="{{ release.title }}" loading="lazy">
+            <div class="release-card__overlay"><span>LISTEN &nbsp;&#8599;</span></div>
+          </div>
+        </a>
+        <div class="release-card__info">
+          <h3 class="release-card__title">{{ release.title }}</h3>
+          <p class="release-card__meta">
+            <em>{{ release.format }}</em>
+            &nbsp;&middot;&nbsp;
+            {{ release.year }}
+            &nbsp;&middot;&nbsp;
+            {{ release.tracks }} tracks
+          </p>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  <div class="releases__footer" data-reveal data-delay="3">
+    <a href="{{ '/discography' | relative_url }}" class="releases__view-all">
+      View full discography &nbsp;&#8594;
+    </a>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════ VIDEOS -->
+<section class="section videos" id="videos" aria-labelledby="videos-title">
+
+  <div data-reveal>
+    <span class="section-label">02 &nbsp;// &nbsp;Visual</span>
+    <h2 class="section-title" id="videos-title">Videos</h2>
+  </div>
+
+  {% assign has_videos = false %}
+  {% for video in site.data.videos %}
+    {% if video.youtube_id != 'REPLACE_ID' %}{% assign has_videos = true %}{% endif %}
+  {% endfor %}
+
+  {% if has_videos %}
+  <div class="videos__grid" data-reveal data-delay="2">
+    {% for video in site.data.videos %}{% if video.youtube_id != 'REPLACE_ID' %}
+    <article class="video-card">
+      <a href="https://www.youtube.com/watch?v={{ video.youtube_id }}" target="_blank" rel="noopener noreferrer" class="video-card__thumb" aria-label="Watch {{ video.title }}">
+        <img src="https://img.youtube.com/vi/{{ video.youtube_id }}/hqdefault.jpg" alt="{{ video.title }}" loading="lazy">
+        <div class="video-card__play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </a>
+      <div class="video-card__info">
+        <h3 class="video-card__title">{{ video.title }}</h3>
+        <p class="video-card__meta">{{ video.year }}{% if video.type %} &nbsp;&middot;&nbsp; {{ video.type }}{% endif %}</p>
+      </div>
+    </article>
+    {% endif %}{% endfor %}
+  </div>
+
+  <div class="videos__footer" data-reveal data-delay="3">
+    <a href="https://www.youtube.com/@atlasanon.2121" target="_blank" rel="noopener noreferrer" class="videos__more">
+      More Videos &nbsp;&#8599;
+    </a>
+  </div>
+  {% else %}
+  <div class="videos__placeholder" data-reveal data-delay="2">
+    <span>[ VIDEOS COMING SOON ]</span>
+  </div>
+  {% endif %}
+
+</section>
+
+<!-- ════════════════════════════════════════════════ ABOUT -->
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="about__inner">
+
+    <div class="about__text" data-reveal="left">
+      <span class="section-label">03 &nbsp;// &nbsp;Signal</span>
+      <h2 class="section-title" id="about-title">About</h2>
+      <p>Atlas//Anon is a UK-based producer navigating the shadowed frequencies between wave, witch house, future garage, and post-club. An anonymous atlas — a guide to places that exist only in the space between isolation and release.</p>
+      <p>Built from dystopian atmospheres, deep bass architecture, and ethereal vocals that dissolve at the edges, the project has carved a distinctive sonic world since 2018. Dark. Cinematic. Intimate.</p>
+      <p>Music for late-night cities. For the solitary and the searching.</p>
+      <div class="divider"></div>
+      <div class="social-links">
+        {% for social in site.data.socials %}
+        <a href="{{ social.url }}" target="_blank" rel="noopener noreferrer">{{ social.label }} &#8599;</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="about__visual" data-reveal="right" data-delay="2">
+      <div class="about__image-wrap">
+        <img
+          src="{{ '/assets/images/about.png' | relative_url }}"
+          alt="Atlas//Anon"
+          class="about__photo"
+          loading="lazy"
+        >
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ LABEL -->
+<section class="section label-section" id="label" aria-labelledby="label-title">
+  <div class="label-section__bg" aria-hidden="true"></div>
+  <div class="label-section__inner">
+    <div data-reveal><span class="section-label">04 &nbsp;// &nbsp;Home</span></div>
+    <img src="{{ '/assets/images/zetsubou-records.png' | relative_url }}" alt="Zetsubou Records" class="label-section__logo" data-reveal data-delay="1">
+    <h2 class="section-title" id="label-title" data-reveal data-delay="2">Zetsubou Records</h2>
+    <p class="label-section__desc" data-reveal data-delay="3">
+      <em class="label-section__kanji">絶望</em>
+      An independent label for music that lives in the dark.
+    </p>
+
+    <div class="label-section__roster" data-reveal data-delay="3">
+      <span class="label-section__roster-label">Artists</span>
+      <div class="label-section__artists">
+        <a href="https://www.instagram.com/atlasanon/" target="_blank" rel="noopener noreferrer" class="label-section__artist">Atlas//Anon</a>
+        <span class="label-section__artist-sep">//</span>
+        <a href="https://www.instagram.com/ambiguousdreamsofficial/" target="_blank" rel="noopener noreferrer" class="label-section__artist">Ambiguous Dreams</a>
+        <span class="label-section__artist-sep">//</span>
+        <a href="https://www.instagram.com/towardsdistantmusic/" target="_blank" rel="noopener noreferrer" class="label-section__artist">Towards Distant</a>
+      </div>
+    </div>
+
+    <div class="label-section__links" data-reveal data-delay="4">
+      <a href="https://www.instagram.com/zetsubourecords/" class="label-section__link label-section__link--primary" target="_blank" rel="noopener noreferrer">Instagram &nbsp;&#8599;</a>
+      <a href="https://atlasanon.bandcamp.com" class="label-section__link" target="_blank" rel="noopener noreferrer">Bandcamp &#8599;</a>
+    </div>
+  </div>
+</section>

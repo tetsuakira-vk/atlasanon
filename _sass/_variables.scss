@@ -1,0 +1,30 @@
+// ── Colours ──────────────────────────────────────────────────
+$black:          #060608;
+$surface:        #0c0c10;
+$surface-2:      #121218;
+$purple-dark:    #1a0a30;
+$purple:         #7c3aed;
+$purple-light:   #9d5eff;
+$magenta:        #c026d3;
+$pink:           #e879f9;
+$text:           #e8e8e8;
+$text-muted:     #66667a;
+$border:         rgba(124, 58, 237, 0.2);
+$border-bright:  rgba(232, 121, 249, 0.4);
+
+// ── Typography ───────────────────────────────────────────────
+$font-mono:    'Space Mono', monospace;
+$font-display: 'Cormorant Garamond', serif;
+
+// ── Spacing ──────────────────────────────────────────────────
+$section-pad:        6rem 3rem;
+$section-pad-mobile: 4rem 1.5rem;
+
+// ── Motion ───────────────────────────────────────────────────
+$ease:      0.3s ease;
+$ease-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+// ── Z-index ──────────────────────────────────────────────────
+$z-grain: 9999;
+$z-nav:   100;
+$z-menu:  200;
