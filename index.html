@@ -152,6 +152,41 @@ title: ""
 
 </section>
 
+<!-- ══════════════════════════════════════════════ MERCH -->
+<section class="section merch" id="merch" aria-labelledby="merch-title">
+
+  <div data-reveal>
+    <span class="section-label">// &nbsp;Merch</span>
+    <h2 class="section-title" id="merch-title">Wear the Signal</h2>
+  </div>
+
+  <div class="merch__grid" data-reveal data-delay="2">
+    {% for item in site.data.merch %}
+    <article class="merch-card">
+      <div class="merch-card__scene">
+        <div class="merch-card__flipper">
+          <div class="merch-card__face merch-card__face--front">
+            <img src="{{ item.front | relative_url }}" alt="{{ item.name }} — front" loading="lazy">
+          </div>
+          <div class="merch-card__face merch-card__face--back">
+            <img src="{{ item.back | relative_url }}" alt="{{ item.name }} — back" loading="lazy">
+          </div>
+        </div>
+        <div class="merch-card__hint" aria-hidden="true">flip</div>
+      </div>
+      <div class="merch-card__info">
+        <h3 class="merch-card__name">{{ item.name }}</h3>
+        <p class="merch-card__type"><em>{{ item.type }}</em></p>
+        <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer" class="merch-card__buy">
+          Shop Now &nbsp;&#8599;
+        </a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+</section>
+
 <!-- ═══════════════════════════════════════════════ VIDEOS -->
 <section class="section videos" id="videos" aria-labelledby="videos-title">
 

@@ -1,0 +1,13 @@
+- id: standard
+  name: "Atlas//Anon Classic Tee"
+  type: "Creator T-Shirt"
+  front: /assets/images/merch/standard-front.png
+  back: /assets/images/merch/standard-back.png
+  link: https://www.inkthreadable.co.uk/creator-t-shirt?designProduct=50565795
+
+- id: glitch
+  name: "Atlas//Anon Glitch Tee"
+  type: "Classic Oversized Tee"
+  front: /assets/images/merch/glitch-front.png
+  back: /assets/images/merch/glitch-back.png
+  link: https://www.inkthreadable.co.uk/classic-oversized-tee?designProduct=50565807
